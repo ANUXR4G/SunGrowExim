@@ -54,10 +54,10 @@ export function ProductPage({ product }: { product: Product }) {
                     </tr>
                   </thead>
                   <tbody>
-                    {product.table.rows.map((row) => (
-                      <tr key={row[0]}>
-                        {row.map((cell) => (
-                          <td key={cell.slice(0, 32)}>{cell}</td>
+                    {product.table.rows.map((row, rowIndex) => (
+                      <tr key={`row-${rowIndex}`}>
+                        {row.map((cell, cellIndex) => (
+                          <td key={`cell-${rowIndex}-${cellIndex}`}>{cell}</td>
                         ))}
                       </tr>
                     ))}
