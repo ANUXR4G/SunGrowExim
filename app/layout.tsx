@@ -1,30 +1,21 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Oxanium } from "next/font/google";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import { FloatingWidgets } from "@/components/FloatingWidgets";
-import { site } from "@/lib/site-data";
 import "./globals.css";
-
-const oxanium = Oxanium({
-  variable: "--font-oxanium",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-});
-
-const bricolage = Bricolage_Grotesque({
-  variable: "--font-bricolage",
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-});
+import { cssHrefs } from "@/lib/live-html/chrome";
 
 export const metadata: Metadata = {
-  title: {
-    default: `${site.name} – Trading & Export Partner`,
-    template: `%s | ${site.name}`,
+  title: "Sun Grow Exim",
+  description:
+    "Trusted merchant exporter from India — mango pulp, rice, spices, coconut products and agricultural commodities.",
+  icons: {
+    icon: "/favicon.png",
   },
-  description: site.description,
 };
+
+const STYLESHEETS = Array.from(
+  new Set(
+    cssHrefs.map((href) => href.split("?")[0]).filter((href) => href.startsWith("/")),
+  ),
+);
 
 export default function RootLayout({
   children,
@@ -32,13 +23,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${oxanium.variable} ${bricolage.variable}`}>
-      <body className="min-h-screen antialiased">
-        <Header />
-        <main>{children}</main>
-        <Footer />
-        <FloatingWidgets />
-      </body>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="stylesheet" href="/css/live/wp-global.css" />
+        {STYLESHEETS.map((href) => (
+          <link key={href} rel="stylesheet" href={href} />
+        ))}
+      </head>
+      <body suppressHydrationWarning>{children}</body>
     </html>
   );
 }

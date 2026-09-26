@@ -1,20 +1,12 @@
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Page Not Found",
-};
+import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <section className="container-site flex min-h-[60vh] flex-col items-center justify-center py-24 text-center">
-      <h1 className="section-title">Page not found</h1>
-      <p className="mt-3 text-muted">
-        The page you are looking for does not exist.
+    <main style={{ padding: "4rem 1.5rem", textAlign: "center" }}>
+      <h1>Page not found</h1>
+      <p>
+        <Link href="/">Back to home</Link>
       </p>
-      <a href="/" className="btn-secondary mt-8">
-        Back to Home
-        <span className="btn-dot">→</span>
-      </a>
-    </section>
+    </main>
   );
 }
